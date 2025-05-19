@@ -1,3 +1,9 @@
+"""
+projekt_2.py: druhý projekt do Engeto Online Python Akademie
+
+author: Kateřina Pokorná
+email: k.mackova@email.cz
+"""
 import random
 
 def test_guess(input_string: str) -> bool:
@@ -24,7 +30,8 @@ def test_guess(input_string: str) -> bool:
 
 def get_guess() -> tuple:
     """
-    Ask for user input (guess number) until it is correct (i.e. test_guess function returns True).
+    Ask for user input (guess number) until it is correct
+    (i.e. test_guess function returns True).
     Return tuple including integers (digits of the guess number).
     """
     guess_input = ""
@@ -34,7 +41,8 @@ def get_guess() -> tuple:
 
 def count_bulls(secret_tuple: tuple, guess_tuple: tuple) -> int:
     """
-    Count bulls, i.e. the user guessed both the correct digit and its correct position.
+    Count bulls, i.e. the user guessed both the correct digit
+    and its correct position.
     """
     bulls_counter = 0
     for digit_secret, digit_guess in zip(secret_tuple, guess_tuple):
@@ -42,9 +50,14 @@ def count_bulls(secret_tuple: tuple, guess_tuple: tuple) -> int:
             bulls_counter +=1     
     return bulls_counter
 
-def count_cows(secret_tuple: tuple, guess_tuple: tuple, number_of_bulls: int) -> int:
+def count_cows(
+    secret_tuple: tuple,
+    guess_tuple: tuple,
+    number_of_bulls: int
+    ) -> int:
     """
-    Count cows, i.e. the user guessed the correct digit but on a differnt position.
+    Count cows, i.e. the user guessed the correct digit
+    but on a differnt position.
     """
     cows_counter = - number_of_bulls
     for digit_secret in secret_tuple:
@@ -74,14 +87,6 @@ digits_2to4 = random.sample(available_digits, k = 3)
 
 secret_number = tuple([digit_1] + digits_2to4)
 
-
-# to tam nema byt :)
-for i in secret_number:
-    print(i, end="")
-else:
-    print()
-
-
 print("Hi there!")
 sep_line()
 print("I've generated a random 4 digit number for you.")
@@ -91,9 +96,9 @@ print("Enter a number:")
 sep_line()
 
 guess_counter = 0
-bulls = 0
+continue_game = True
 
-while bulls < 4:
+while continue_game:
     guess = get_guess()
     guess_counter += 1
     bulls = count_bulls(secret_number, guess)
@@ -101,7 +106,9 @@ while bulls < 4:
         cows = count_cows(secret_number, guess, bulls)
         print(f"{bulls_msg(bulls)}, {cows_msg(cows)}")
         sep_line()
-else:
-    print(f"Correct, you've guessed the right number\nin {guess_counter} guesses!")
-    sep_line()
-    print("That's amazing!")
+    else:
+        continue_game = False
+
+print(f"Correct, you've guessed the right number\nin {guess_counter} guesses!")
+sep_line()
+print("That's amazing!")
