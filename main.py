@@ -15,7 +15,7 @@ def test_guess(input_string: str) -> bool:
         if input_string[0] == "0":
             print ("The first digit can't be 0.")
             guess_ok = False
-        if input_string.isnumeric() == False:
+        if not input_string.isnumeric():
             print("The number should include just numeric characters.")
             guess_ok = False
         if len(input_string) != 4:
@@ -35,7 +35,7 @@ def get_guess() -> tuple:
     Return tuple including integers (digits of the guess number).
     """
     guess_input = ""
-    while test_guess(guess_input) == False:
+    while not test_guess(guess_input):
         guess_input = input()
     return tuple(int(digit) for digit in guess_input)
 
